@@ -36,24 +36,19 @@ class MainActivity : AppCompatActivity() {
         ,R.drawable.carta49,R.drawable.carta50
         ,R.drawable.carta51,R.drawable.carta52
         ,R.drawable.carta53,R.drawable.carta54)
-
     var ImagenInicial = arrayOf(R.drawable.imagenfondo)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
         binding.btnVerificar.visibility= View.GONE
         binding.btnReiniciar.visibility= View.GONE
         binding.btnSuspender.visibility= View.GONE
         (0..arregloImagenes.size-1).forEach{
             println(arregloImagenes[it])
         }
-        var cantidad = arregloImagenes.size-1
-        var OrdenarImagenes = arregloImagenes.shuffle()
         var contador = 0
-        OrdenarImagenes
-
+        barajear()
         val scoope = CoroutineScope(Job() + Dispatchers.Main)
         var objetoCoroutineControlada = scoope.launch(EmptyCoroutineContext, CoroutineStart.LAZY){
             //Ejecución en segundo plano
@@ -106,8 +101,7 @@ class MainActivity : AppCompatActivity() {
             binding.btnVerificar.visibility= View.GONE
             binding.btnReiniciar.visibility= View.GONE
             contador = 0
-            var OrdenarImagenes2 = arregloImagenes.shuffle()
-            OrdenarImagenes2
+            barajear()
             objetoCoroutineControlada = scoope.launch(EmptyCoroutineContext, CoroutineStart.LAZY){
                 //Ejecución en segundo plano
                 while (true){
@@ -133,6 +127,16 @@ class MainActivity : AppCompatActivity() {
                 }
             }
             objetoCoroutineControlada.start()
+        }
+    }
+    fun barajear(){
+        var i = arregloImagenes.size -1
+        while (i >= 0) {
+            var j = Math.floor(Math.random() * (i + 1)).toInt();
+            var x = arregloImagenes[i];
+            arregloImagenes[i] = arregloImagenes[j];
+            arregloImagenes[j] = x;
+            i--
         }
     }
 }
