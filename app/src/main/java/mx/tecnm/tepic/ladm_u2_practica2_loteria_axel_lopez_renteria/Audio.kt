@@ -63,8 +63,6 @@ fun Audio(arregloimagenes : Array<Int>, conta : Int,contexto: Context, activity:
         var mediaPlayer52: MediaPlayer = MediaPlayer.create(contexto, R.raw.lamaceta)
         var mediaPlayer53: MediaPlayer = MediaPlayer.create(contexto, R.raw.elarpa)
         var mediaPlayer54: MediaPlayer = MediaPlayer.create(contexto, R.raw.larana)
-    //override fun run() {
-       // super.run()
         when(ArregloGlobal[contador]){
             2131165280 -> { mediaPlayer1?.start()}
             2131165291 -> { mediaPlayer2?.start()}
@@ -122,5 +120,4 @@ fun Audio(arregloimagenes : Array<Int>, conta : Int,contexto: Context, activity:
             2131165329 -> { mediaPlayer54?.start() }
             else -> { }
         }
-   // }
 }

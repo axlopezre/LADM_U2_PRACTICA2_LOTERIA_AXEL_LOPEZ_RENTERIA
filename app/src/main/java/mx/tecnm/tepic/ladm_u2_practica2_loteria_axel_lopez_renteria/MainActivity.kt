@@ -1,17 +1,12 @@
 package mx.tecnm.tepic.ladm_u2_practica2_loteria_axel_lopez_renteria
-
-import android.content.Context
-import android.media.MediaPlayer
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AlertDialog
-import androidx.core.content.ContentProviderCompat.requireContext
 import kotlinx.coroutines.*
 import mx.tecnm.tepic.ladm_u2_practica2_loteria_axel_lopez_renteria.databinding.ActivityMainBinding
+import java.lang.Thread.sleep
 import kotlin.coroutines.EmptyCoroutineContext
-import kotlin.random.Random
-
 class MainActivity : AppCompatActivity() {
     lateinit var binding: ActivityMainBinding
     var arregloImagenes = arrayOf(R.drawable.carta1,R.drawable.carta2
@@ -64,10 +59,9 @@ class MainActivity : AppCompatActivity() {
             //Ejecución en segundo plano
             while (true){
                 runOnUiThread {
-                    Audio(arregloImagenes, contador,this@MainActivity, MainActivity())
-                    binding.imagen.setImageResource(arregloImagenes[contador++])
-                    //Audio(mediaPlayer1, arregloImagenes, contador)
                     if(contador == arregloImagenes.size-1) {
+                        binding.imagen.setImageResource(arregloImagenes[53])
+                        sleep(1000L)
                         contador = 0
                         AlertDialog.Builder(this@MainActivity)
                             .setMessage("SE HA TERMINADO")
@@ -77,13 +71,15 @@ class MainActivity : AppCompatActivity() {
                         binding.imagen.setImageResource(ImagenInicial[0])
                         binding.btnSuspender.visibility= View.GONE
                         binding.btnReiniciar.visibility= View.VISIBLE
+                    }else{
+                        Audio(arregloImagenes, contador,this@MainActivity, MainActivity())
+                        binding.imagen.setImageResource(arregloImagenes[contador++])
                     }
                 }
                 delay(1000L)
             }
         }
         binding.imagen.setImageResource(ImagenInicial[0])
-
         binding.btnIniciar.setOnClickListener {
             objetoCoroutineControlada.start()
             binding.btnIniciar.visibility= View.GONE
@@ -116,9 +112,9 @@ class MainActivity : AppCompatActivity() {
                 //Ejecución en segundo plano
                 while (true){
                     runOnUiThread {
-                        Audio(arregloImagenes, contador,this@MainActivity,MainActivity())
-                        binding.imagen.setImageResource(arregloImagenes[contador++])
                         if(contador == arregloImagenes.size-1) {
+                            binding.imagen.setImageResource(arregloImagenes[53])
+                            sleep(1000L)
                             contador = 0
                             AlertDialog.Builder(this@MainActivity)
                                 .setMessage("SE HA TERMINADO")
@@ -128,6 +124,9 @@ class MainActivity : AppCompatActivity() {
                             binding.imagen.setImageResource(ImagenInicial[0])
                             binding.btnSuspender.visibility= View.GONE
                             binding.btnReiniciar.visibility= View.VISIBLE
+                        }else{
+                            Audio(arregloImagenes, contador,this@MainActivity, MainActivity())
+                            binding.imagen.setImageResource(arregloImagenes[contador++])
                         }
                     }
                     delay(1000L)
@@ -135,9 +134,5 @@ class MainActivity : AppCompatActivity() {
             }
             objetoCoroutineControlada.start()
         }
-    }
-
-    private fun rand(hasta:Int) : Int{
-        return Random.nextInt(hasta)
     }
 }

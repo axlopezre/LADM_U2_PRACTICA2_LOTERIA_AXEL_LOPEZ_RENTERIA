@@ -1,9 +1,6 @@
 package mx.tecnm.tepic.ladm_u2_practica2_loteria_axel_lopez_renteria
-
 import android.content.Context
 import androidx.appcompat.app.AlertDialog
-import androidx.core.content.ContentProviderCompat.requireContext
-
 class Hilo(arregloimagenes : Array<Int>, conta : Int,contexto:Context, activity: MainActivity): Thread(){//clase B
 val ArregloGlobal = arregloimagenes
     var cadena=""
@@ -13,9 +10,6 @@ val ArregloGlobal = arregloimagenes
     var activity = activity
     override fun run() {
         super.run()
-        //Se ejecuta en 2do plano, y es INVACADO a través del start()
-        // el run se ejecuta 1 sola vez y después muere
-        //ESTE METODO SE EJECUTA UNA SOLA VEZ, NO ES CICLO COMO OnTick
         while(contador<tamaño) {
             when(ArregloGlobal[contador]){
                 2131165280 -> { cadena+= "El gallo\n" }
@@ -88,4 +82,4 @@ val ArregloGlobal = arregloimagenes
         }
         cadena=" "
     }
-}//Todoo este código es un Hilo y En memoria es como tener una segunda aplicación separado
+}
